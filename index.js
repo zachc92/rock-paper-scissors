@@ -92,14 +92,18 @@ function game(choice){
     if(roundWinner == "player"){
         playerWins++;
         playerScore.textContent = playerWins;
-        if(playerWins == 5){
+        if(playerWins == 5 && computerWins < 5){
             roundAlert.textContent = "You've won the game! Continue playing, or reset the score."
+        } else {
+            return;
         }
     } else if (roundWinner == "computer"){
         computerWins++;
         computerScore.textContent = computerWins;
-        if(computerWins == 5){
+        if(computerWins == 5 && playerWins < 5){
             roundAlert.textContent = "You've lost the game! Continue playing, or reset the score."
+        } else {
+            return;
         }
     }
 };
