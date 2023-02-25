@@ -4,10 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="index.js"></script>
+    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="styles.css">
     <title>Document</title>
 </head>
 <body>
-    
+    <div class="container">
+        <h1>Rock, Paper, Scissors</h1>
+        <p>Make your choice! The scores are - Player: <span id="playerScore">0</span> Computer: <span id="computerScore">0</span></p>
+        <div class="buttonContainer">
+            <button id="rock">Rock</button>
+            <button id="paper">Paper</button>
+            <button id="scissors">Scissors</button>
+            <button id="reset">Reset</button>
+        </div>
+        <p id="roundAlert"></p>
+    </div>
 </body>
 </html>

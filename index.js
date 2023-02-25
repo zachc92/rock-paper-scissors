@@ -1,3 +1,22 @@
+const rockButton = document.getElementById('rock');
+rockButton.addEventListener('click', () => game('rock'));
+
+const paperButton = document.getElementById('paper');
+paperButton.addEventListener('click', () => game('paper'));
+
+const scissorsButton = document.getElementById('scissors');
+scissorsButton.addEventListener('click', () => game('scissors'));
+
+const resetButton = document.getElementById('reset');
+resetButton.addEventListener('click', () => reset());
+
+let playerScore = document.getElementById('playerScore');
+let computerScore = document.getElementById('computerScore');
+let roundAlert = document.getElementById('roundAlert');
+
+let playerWins = 0;
+let computerWins = 0;
+
 function getRandomInt(min, max){
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -20,71 +39,97 @@ function playTheGame(playerSelection, computerSelection){
     if(playerSelection2 == "rock"){
         switch (computerSelection2){
             case "rock":
-                alert("You both selected rock, so it's a tie!");
+                roundAlert.textContent = "You both selected rock, so it's a tie!"; 
                 return "tie";
             case "paper":
-                alert("The computer selected paper, so they win!");
+                roundAlert.textContent = "The computer selected paper, so they win!";
                 return "computer";
             case "scissors":
-                alert("The computer selected scissors, so you win!");
+                roundAlert.textContent = "The computer selected scissors, so you win!";
                 return "player";
         }
     } else if(playerSelection2 == "paper"){
         switch (computerSelection2){
             case "rock":
-                alert("The computer selected rock, so you win!");
+                roundAlert.textContent = "The computer selected rock, so you win!";
                 return "player";
             case "paper":
-                alert("You both selected paper, so it's a tie!");
+                roundAlert.textContent = "You both selected paper, so it's a tie!";
                 return "tie";
             case "scissors":
-                alert("The computer selected scissors, so they win!");
+                roundAlert.textContent = "The computer selected scissors, so they win!";
                 return "computer";
         }
     } else if(playerSelection2 == "scissors"){
         switch (computerSelection2){
             case "rock":
-                alert("The computer selected rock, so they win!");
+                roundAlert.textContent = "The computer selected rock, so they win!";
                 return "computer";
             case "paper":
-                alert("The computer selected paper, so you win!");
+                roundAlert.textContent = "The computer selected paper, so you win!";
                 return "player";
             case "scissors":
-                alert("You both selected scissors, so it's a tie!");
+                roundAlert.textContent = "You both selected scissors, so it's a tie!";
                 return "tie";
         }
-    } else {
-        alert("Please make sure you enter a valid answer.");
     }
 }
 
-function game(){
-    let playerWins = 0;
-    let computerWins = 0;
+function reset(){
+    playerWins = 0;
+    computerWins = 0;
+    playerScore.textContent = playerWins;
+    computerScore.textContent = computerWins;
+    roundAlert.textContent = "Resetting the scores..."
+}
+
+function game(choice){
     let roundWinner = "nothing";
-    for(let i = 0; i < 5; i++) {
-        let playerChoice = prompt("Let's play rock, paper, scissors! What is your choice?");
-        let randomInt = getRandomInt(1,4);
-        let computerChoice = getComputerChoice(randomInt);
-        roundWinner = playTheGame(playerChoice, computerChoice);
-        if(roundWinner == "player"){
-            playerWins++;
-            alert(`You have won ${playerWins} and the computer has won ${computerWins}`);
-            if(playerWins >= 3){
-                return;
-            } // setting win cap to three (best of five)
-        } else if (roundWinner == "computer"){
-            computerWins++;
-            alert(`You have won ${playerWins} and the computer has won ${computerWins}`);
-            if(computerWins >= 3){
-                return;
-            } // setting win cap to three (best of five)
-        } else if (roundWinner == "tie"){
-            alert(`You have won ${playerWins} and the computer has won ${computerWins}`);
-            i--; // decrement loop counter in the event of a tie so that we can still get best of five
+    let playerChoice = choice;
+    let randomInt = getRandomInt(1,4);
+    let computerChoice = getComputerChoice(randomInt);
+    roundWinner = playTheGame(playerChoice, computerChoice);
+    if(roundWinner == "player"){
+        playerWins++;
+        playerScore.textContent = playerWins;
+        if(playerWins == 5){
+            roundAlert.textContent = "You've won the game! Continue playing, or reset the score."
+        }
+    } else if (roundWinner == "computer"){
+        computerWins++;
+        computerScore.textContent = computerWins;
+        if(computerWins == 5){
+            roundAlert.textContent = "You've lost the game! Continue playing, or reset the score."
         }
     }
-}
+};
 
+// Old function for looping through game rounds with alerts
 
-game();
+// function game(){
+//     let playerWins = 0;
+//     let computerWins = 0;
+//     let roundWinner = "nothing";
+//     for(let i = 0; i < 5; i++) {
+//         let playerChoice = prompt("Let's play rock, paper, scissors! What is your choice?");
+//         let randomInt = getRandomInt(1,4);
+//         let computerChoice = getComputerChoice(randomInt);
+//         roundWinner = playTheGame(playerChoice, computerChoice);
+//         if(roundWinner == "player"){
+//             playerWins++;
+//             alert(`You have won ${playerWins} and the computer has won ${computerWins}`);
+//             if(playerWins >= 3){
+//                 return;
+//             } // setting win cap to three (best of five)
+//         } else if (roundWinner == "computer"){
+//             computerWins++;
+//             alert(`You have won ${playerWins} and the computer has won ${computerWins}`);
+//             if(computerWins >= 3){
+//                 return;
+//             } // setting win cap to three (best of five)
+//         } else if (roundWinner == "tie"){
+//             alert(`You have won ${playerWins} and the computer has won ${computerWins}`);
+//             i--; // decrement loop counter in the event of a tie so that we can still get best of five
+//         }
+//     }
+// }
