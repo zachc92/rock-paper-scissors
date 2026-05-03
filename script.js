@@ -10,17 +10,16 @@ function playGame(){
         function getComputerChoice() {
             let number = Math.random() * 10;
             if (number < 3){
-                return "Rock";
+                return "rock";
             } else if (number <= 6){
-                return "Paper";
+                return "paper";
             } else if (number <= 10){
-                return "Scissors"
+                return "scissors"
             }
         }
         let human = getHumanChoice();
-        let computer = getComputerChoice();
+        let computerChoice = getComputerChoice();
         let humanChoice = human.toLowerCase();
-        let computerChoice = computer.toLowerCase();
         console.log(humanChoice, computerChoice);
         if (humanChoice === computerChoice){
             console.log("It's a tie!");
