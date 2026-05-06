@@ -1,42 +1,32 @@
-let computerScore = 0;
-let humanScore = 0;
+const people = [
+  "Chris",
+  "Anne",
+  "Colin",
+  "Terri",
+  "Phil",
+  "Lola",
+  "Sam",
+  "Kay",
+  "Bruce",
+];
 
-function playGame(){
-    function playRound(){
-        function getHumanChoice() {
-            let choice = prompt('Rock, Paper, or Scissors?');
-            return choice;
-        }
-        function getComputerChoice() {
-            let number = Math.random() * 10;
-            if (number < 3){
-                return "rock";
-            } else if (number <= 6){
-                return "paper";
-            } else if (number <= 10){
-                return "scissors"
-            }
-        }
-        let human = getHumanChoice();
-        let computerChoice = getComputerChoice();
-        let humanChoice = human.toLowerCase();
-        console.log(humanChoice, computerChoice);
-        if (humanChoice === computerChoice){
-            console.log("It's a tie!");
-            console.log(`Your score: ${humanScore} || Computer Score: ${computerScore}`);
-        } else if (humanChoice == 'rock' && computerChoice == 'scissors' || humanChoice == 'scissors' && computerChoice == 'paper' || humanChoice == 'paper' && computerChoice == 'rock'){
-            console.log("You win!");
-            humanScore++;
-            console.log(`Your score: ${humanScore} || Computer Score: ${computerScore}`);
-        } else if (computerChoice == 'rock' && humanChoice == 'scissors' || computerChoice == 'scissors' && humanChoice == 'paper' || computerChoice == 'paper' && humanChoice == 'rock'){
-            console.log('You lose!');
-            computerScore++;
-            console.log(`Your score: ${humanScore} || Computer Score: ${computerScore}`);
-        }
-    }
-    for(i=0; i<5; i++){
-        playRound();
+const admitted = document.querySelector(".admitted");
+const refused = document.querySelector(".refused");
+admitted.textContent = "Admit: ";
+refused.textContent = "Refuse: ";
+
+// loop starts here
+
+for (const person of people){
+    if(person == "Phil" || person == "Lola"){
+        refused.textContent += `${person}, `;
+    } else {
+        admitted.textContent += `${person}, `;
     }
 }
 
-playGame();
+let finalRefusedList = refused.textContent.slice(0, refused.textContent.length-2);
+let finalAdmittedList = admitted.textContent.slice(0, admitted.textContent.length-2);
+
+refused.textContent = finalRefusedList;
+admitted.textContent = finalAdmittedList;
